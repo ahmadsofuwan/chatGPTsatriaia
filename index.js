@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
     const browser = await puppeteer.launch({
         // executablePath:chromium.path,
         userDataDir: './browser_data',
-        headless: "new",
+        headless: false,
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
@@ -39,6 +39,11 @@ app.get('/', (req, res) => {
         document.head.appendChild(script);
     });
     await page.waitForTimeout(2000);
+    await page.click(".sys-edit-btn");
+    await page.type("body > main > astro-island > div > div.my-4 > div > div:nth-child(3) > textarea", process.env.ROLE);
+    await page.click("body > main > astro-island > div > div.my-4 > div > button");
+
+
 
     const pageTitle = await page.evaluate(() => {
         // Kode JavaScript untuk evaluasi di dalam halaman
