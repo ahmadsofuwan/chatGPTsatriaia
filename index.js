@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 (async () => {
     const browser = await puppeteer.launch({
         // executablePath:chromium.path,
-        userDataDir: './browser_data',
+        // userDataDir: './browser_data',
         headless: "new",
         args: [
             '--no-sandbox',
@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
             '--disable-dev-shm-usage',
             '--disable-accelerated-2d-canvas',
             '--no-first-run',
-            //'--single-process',//this one does't work ini windows
+            '--single-process',//this one does't work ini windows
             '--disable-gpu',
         ],
 
@@ -39,9 +39,9 @@ app.get('/', (req, res) => {
         document.head.appendChild(script);
     });
     await page.waitForTimeout(2000);
-    await page.click(".sys-edit-btn");
-    await page.type("body > main > astro-island > div > div.my-4 > div > div:nth-child(3) > textarea", process.env.ROLE);
-    await page.click("body > main > astro-island > div > div.my-4 > div > button");
+    // await page.click(".sys-edit-btn");
+    // await page.type("body > main > astro-island > div > div.my-4 > div > div:nth-child(3) > textarea", process.env.ROLE);
+    // await page.click("body > main > astro-island > div > div.my-4 > div > button");
 
 
 
@@ -54,16 +54,23 @@ app.get('/', (req, res) => {
 })();
 function generate(promb, callback) {
     (async () => {
-
-        await page.type('.gen-textarea', promb);
+        await page.type('body > main > astro-island > div > div.gen-text-wrapper > textarea', promb);
         await page.keyboard.press('Enter');
-        const response = await page.waitForResponse(response => response.url().includes('https://www.satriaopenai.site/api/generate'));
-        // Mendapatkan data JSON dari respons
-        const responseData = await response.text();
-        return callback(responseData)
+
+        let responseData;
+        page.on('response', async (response) => {
+            if (response.request().method() === 'POST') {
+                responseData = await response.text();
+                // console.log(responseData);
+                return callback(responseData);
+            }
+        });
+        // await page.waitForTimeout(2000);
+
 
     })();
 }
+
 
 
 
