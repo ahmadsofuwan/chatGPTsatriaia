@@ -39,9 +39,9 @@ app.get('/', (req, res) => {
         document.head.appendChild(script);
     });
     await page.waitForTimeout(2000);
-    // await page.click(".sys-edit-btn");
-    // await page.type("body > main > astro-island > div > div.my-4 > div > div:nth-child(3) > textarea", process.env.ROLE);
-    // await page.click("body > main > astro-island > div > div.my-4 > div > button");
+    await page.click(".sys-edit-btn");
+    await page.type("body > main > astro-island > div > div.my-4 > div > div:nth-child(3) > textarea", process.env.ROLE);
+    await page.click("body > main > astro-island > div > div.my-4 > div > button");
 
 
 
