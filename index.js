@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
     browser = await puppeteer.launch({
         // executablePath:chromium.path,
         userDataDir: './my-user-data',
-        headless: false,
+        headless: "new",
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
