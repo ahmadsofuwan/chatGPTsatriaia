@@ -1,11 +1,12 @@
+require('dotenv').config();
 const puppeteer = require('puppeteer');
 const express = require('express');
 const app = express();
-
+const serverPort = process.env.PORT;
 var browser
 var page
 app.listen(9090, () => {
-    console.log('GPT berjalan di port 9090');
+    console.log('GPT berjalan di port ' + serverPort);
 });
 app.get('/', (req, res) => {
     const promb = req.query.promb;
