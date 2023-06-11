@@ -8,13 +8,10 @@ app.listen(9090, () => {
     console.log('GPT berjalan di port ' + serverPort);
 });
 app.get('/', (req, res) => {
-    if (isResponseSent) {
-        return; // Jika respons telah dikirimkan sebelumnya, hentikan penanganan permintaan
-    }
+
     const promb = req.query.promb;
     generate(promb, function (result) {
-        res.send(result);
-        isResponseSent = true;
+        return res.send(result);
     })
 });
 (async () => {
