@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
             '--disable-dev-shm-usage',
             '--disable-accelerated-2d-canvas',
             '--no-first-run',
-            '--single-process',//this one does't work ini windows
+            //'--single-process',//this one does't work ini windows
             '--disable-gpu',
         ],
 
