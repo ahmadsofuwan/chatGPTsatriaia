@@ -3,7 +3,6 @@ const puppeteer = require('puppeteer');
 const express = require('express');
 const app = express();
 const serverPort = process.env.PORT;
-var browser
 var page
 app.listen(9090, () => {
     console.log('GPT berjalan di port ' + serverPort);
@@ -15,7 +14,7 @@ app.get('/', (req, res) => {
     })
 });
 (async () => {
-    browser = await puppeteer.launch({
+    const browser = await puppeteer.launch({
         // executablePath:chromium.path,
         userDataDir: './my-user-data',
         headless: "new",
